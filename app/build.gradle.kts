@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("jacoco")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 tasks.withType<Test> {
     extensions.configure(JacocoTaskExtension::class) {
@@ -108,6 +110,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.espresso.contrib)
     implementation(libs.androidx.espresso.intents)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -128,4 +131,19 @@ dependencies {
     androidTestImplementation (libs.ui.test.junit4)
     debugImplementation ("androidx.compose.ui:ui-test-manifest:1.7.8")
 
+    // Room
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-fragment:1.2.0")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+
+
+}
+kapt {
+    correctErrorTypes = true
 }
