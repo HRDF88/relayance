@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
 
 
             setContent {
-                val uiState by detailViewModel.uiState.observeAsState(DetailUiState.Loading)
+                val uiState by detailViewModel.uiState.collectAsState(DetailUiState.Loading)
 
                 LaunchedEffect(customerId) {
                     detailViewModel.getCustomerDetails(customerId)

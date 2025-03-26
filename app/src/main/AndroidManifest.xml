@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Relayance"
         tools:targetApi="31">
+        <meta-data
+            android:name="android.support.test.runner.AndroidJUnitRunner"
+            android:value="com.kirabium.relayance.CucumberTestRunner" />
         <activity
             android:name=".ui.activity.AddCustomerActivity"
             android:exported="false"

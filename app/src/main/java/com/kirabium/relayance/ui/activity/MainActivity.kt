@@ -6,8 +6,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kirabium.relayance.data.DummyData
 import com.kirabium.relayance.databinding.ActivityMainBinding
@@ -15,6 +15,7 @@ import com.kirabium.relayance.ui.adapter.CustomerAdapter
 import com.kirabium.relayance.ui.main.MainUiState
 import com.kirabium.relayance.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -60,34 +61,34 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
 
-        mainViewModel.uiState.observe(this, Observer { uiState ->
-            Log.d("MainActivity", "UI state updated: $uiState")
-            when (uiState) {
-                is MainUiState.Loading -> {
-                    binding.customerRecyclerView.visibility = View.GONE
-                    Log.d("MainActivity", "Loading state: Showing loading spinner...")
-                }
-
-                is MainUiState.Success -> {
-
-                    binding.customerRecyclerView.visibility = View.VISIBLE
-                    Log.d("MainActivity", "Success state: Showing customers list...")
-                    customerAdapter = CustomerAdapter(uiState.customers) { customer ->
-                        val intent = Intent(this, DetailActivity::class.java).apply {
-                            putExtra(DetailActivity.EXTRA_CUSTOMER_ID, customer.id)
-                        }
-                        startActivity(intent)
+        lifecycleScope.launch {
+            mainViewModel.uiState.collect { uiState ->
+                Log.d("MainActivity", "UI state updated: $uiState")
+                when (uiState) {
+                    is MainUiState.Loading -> {
+                        binding.customerRecyclerView.visibility = View.GONE
+                        Log.d("MainActivity", "Loading state: Showing loading spinner...")
                     }
-                    binding.customerRecyclerView.adapter = customerAdapter
-                }
 
-                is MainUiState.Error -> {
-                    binding.customerRecyclerView.visibility = View.GONE
-                    Log.e("MainActivity", "Error state: ${uiState.message}")
-                    Toast.makeText(this, "Error: ${uiState.message}", Toast.LENGTH_LONG).show()
+                    is MainUiState.Success -> {
+                        binding.customerRecyclerView.visibility = View.VISIBLE
+                        Log.d("MainActivity", "Success state: Showing customers list...")
+
+                        customerAdapter.updateCustomers(uiState.customers)
+                    }
+
+                    is MainUiState.Error -> {
+                        binding.customerRecyclerView.visibility = View.GONE
+                        Log.e("MainActivity", "Error state: ${uiState.message}")
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Error: ${uiState.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
-        })
+        }
 
         mainViewModel.loadCustomers()
     }
