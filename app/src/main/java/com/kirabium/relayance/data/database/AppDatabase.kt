@@ -31,7 +31,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         fun getDatabase(context: Context): AppDatabase {
-            context.deleteDatabase("customer_database")
             return Room.databaseBuilder(
                 context.applicationContext,
                 AppDatabase::class.java,

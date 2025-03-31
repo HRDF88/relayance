@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kirabium.relayance.domain.mapper.CustomerMapper
+import com.kirabium.relayance.domain.model.Customer
 import com.kirabium.relayance.domain.useCase.GetAllCustomersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ class MainViewModel @Inject constructor(private val getAllCustomer: GetAllCustom
     private val _uiState = MutableStateFlow<MainUiState>(MainUiState.Loading)
     val uiState: StateFlow<MainUiState> get() = _uiState
 
+
     fun loadCustomers() {
         _uiState.value = MainUiState.Loading
         viewModelScope.launch {
@@ -27,10 +29,11 @@ class MainViewModel @Inject constructor(private val getAllCustomer: GetAllCustom
 
                 val customers = customersDto.map { customerDto ->
                     CustomerMapper.fromDTO(customerDto)
+
                 }
                 Log.d("MainViewModel", "Mapped customers: $customers")
 
-                _uiState.value = MainUiState.Success(customers)
+                _uiState.value = MainUiState.Success(customers.toList())
             } catch (e: Exception) {
                 Log.e("MainViewModel", "Error loading customers: ${e.message}")
                 _uiState.value = MainUiState.Error(e.message ?: "An error occurred")

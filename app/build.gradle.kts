@@ -28,7 +28,8 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.kirabium.relayance.CucumberTestRunner"
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.kirabium.relayance.test.CucumberTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -49,6 +50,7 @@ android {
         debug {
             enableAndroidTestCoverage = true
             enableUnitTestCoverage = true
+            isTestCoverageEnabled = true
         }
     }
     compileOptions {
@@ -112,6 +114,7 @@ dependencies {
     implementation(libs.androidx.espresso.contrib)
     implementation(libs.androidx.espresso.intents)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.uiautomator)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -131,6 +134,9 @@ dependencies {
     testImplementation(libs.mockito.inline)
     androidTestImplementation (libs.ui.test.junit4)
     debugImplementation ("androidx.compose.ui:ui-test-manifest:1.7.8")
+    androidTestImplementation(libs.androidx.espresso.contrib)
+
+
 
     // Room
     val room_version = "2.6.1"
@@ -142,13 +148,17 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.51.1")
     implementation("androidx.hilt:hilt-navigation-fragment:1.2.0")
     kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
 
     // Cucumber dependencies
     androidTestImplementation(libs.cucumber.android)
-    androidTestImplementation(libs.cucumber.picocontainer)
+
     testImplementation(libs.cucumber.java)
     testImplementation(libs.cucumber.junit)
     testImplementation(libs.cucumber.jvm)
+    androidTestImplementation("io.cucumber:cucumber-android-hilt:7.18.1")
+    androidTestUtil("androidx.test:orchestrator:1.5.0")
+
 
 
 

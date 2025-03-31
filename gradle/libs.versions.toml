@@ -4,6 +4,7 @@ androidxJunit = "1.2.1"
 coreTesting = "2.2.0"
 cucumberKotlin = "8.18.0"
 espressoCoreVersion = "3.5.1"
+espressoToast = "1.0.0"
 kotlin = "1.9.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -23,6 +24,7 @@ mockitoInline = "5.2.0"
 mockitoKotlin = "5.0.0"
 uiTestJunit4 = "1.7.8"
 runtimeLivedata = "1.7.8"
+uiautomator = "2.3.0"
 
 
 
@@ -38,6 +40,7 @@ cucumber-junit = { module = "io.cucumber:cucumber-junit", version = "7.18.1" }
 cucumber-jvm = { module = "io.cucumber:cucumber-jvm", version = "7.18.1" }
 cucumber-kotlin = { module = "io.cucumber:cucumber-kotlin", version.ref = "cucumberKotlin" }
 cucumber-picocontainer = { module = "io.cucumber:cucumber-picocontainer", version = "7.18.1" }
+espresso-toast = { module = "com.github.adevinta:espresso-toast", version.ref = "espressoToast" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -62,6 +65,7 @@ mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockito
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
 ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 
 
 

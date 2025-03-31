@@ -1,5 +1,6 @@
 package com.kirabium.relayance.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,10 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val ADD_CUSTOMER_REQUEST_CODE = 1
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var customerAdapter: CustomerAdapter
     private lateinit var mainViewModel: MainViewModel
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupFab() {
         binding.addCustomerFab.setOnClickListener {
             val intent = Intent(this, AddCustomerActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, ADD_CUSTOMER_REQUEST_CODE)
         }
     }
 
@@ -91,5 +96,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         mainViewModel.loadCustomers()
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            mainViewModel.loadCustomers()
+        }
     }
 }

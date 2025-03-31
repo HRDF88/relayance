@@ -17,5 +17,5 @@ data class CustomerDto(
     val email: String,
 
     @ColumnInfo(name = "created_At")
-    val createdAt: Date
+    val createdAt: Date = Date()
 )

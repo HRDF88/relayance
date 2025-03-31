@@ -37,10 +37,8 @@ class CustomerRepositoryTest {
 
         Mockito.`when`(customerDao.getAllCustomers()).thenReturn(customerList)
 
-        // When
         val result = customerRepository.getAllCustomers()
 
-        // Then
         assertEquals(customerList, result)
     }
 

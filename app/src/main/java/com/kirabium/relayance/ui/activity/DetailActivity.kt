@@ -1,5 +1,7 @@
 package com.kirabium.relayance.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
@@ -19,7 +21,14 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CUSTOMER_ID = "customer_id"
+        fun create(targetContext: Context?, nIdCustomer: Int): Intent {
+            return Intent(targetContext, DetailActivity::class.java).putExtra(
+                EXTRA_CUSTOMER_ID,
+                nIdCustomer
+            )
+        }
     }
+
 
     private lateinit var detailViewModel: DetailViewModel
 
@@ -62,6 +71,8 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
+
 }
+
 
 
