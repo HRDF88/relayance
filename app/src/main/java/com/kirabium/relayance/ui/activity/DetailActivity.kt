@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.ViewModelProvider
 import com.kirabium.relayance.ui.composable.DetailScreen
 import com.kirabium.relayance.ui.detail.DetailUiState

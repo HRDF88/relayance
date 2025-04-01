@@ -1,6 +1,5 @@
 package com.kirabium.relayance.test
 
-import android.util.Log
 import android.view.View
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView

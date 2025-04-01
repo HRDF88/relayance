@@ -2,8 +2,6 @@ package com.kirabium.relayance.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -78,7 +76,7 @@ class AddCustomerActivity : AppCompatActivity() {
         }
     }
 
-    private fun isValidEmail(email: String): Boolean {
+    fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 

@@ -3,7 +3,6 @@ package com.kirabium.relayance.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -68,23 +67,20 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             mainViewModel.uiState.collect { uiState ->
-                Log.d("MainActivity", "UI state updated: $uiState")
                 when (uiState) {
                     is MainUiState.Loading -> {
                         binding.customerRecyclerView.visibility = View.GONE
-                        Log.d("MainActivity", "Loading state: Showing loading spinner...")
                     }
 
                     is MainUiState.Success -> {
                         binding.customerRecyclerView.visibility = View.VISIBLE
-                        Log.d("MainActivity", "Success state: Showing customers list...")
+
 
                         customerAdapter.updateCustomers(uiState.customers)
                     }
 
                     is MainUiState.Error -> {
                         binding.customerRecyclerView.visibility = View.GONE
-                        Log.e("MainActivity", "Error state: ${uiState.message}")
                         Toast.makeText(
                             this@MainActivity,
                             "Error: ${uiState.message}",

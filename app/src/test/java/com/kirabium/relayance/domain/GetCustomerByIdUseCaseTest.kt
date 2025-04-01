@@ -1,4 +1,4 @@
-package com.kirabium.relayance.data
+package com.kirabium.relayance.domain
 
 import com.kirabium.relayance.data.dto.CustomerDto
 import com.kirabium.relayance.data.repositoryInterface.CustomerRepositoryInterface

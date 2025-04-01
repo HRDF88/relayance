@@ -1,4 +1,4 @@
-package com.kirabium.relayance.data
+package com.kirabium.relayance.domain
 
 import com.kirabium.relayance.data.dto.CustomerDto
 import com.kirabium.relayance.data.repositoryInterface.CustomerRepositoryInterface
@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
-import java.util.Calendar
+import java.util.Date
 
 class GetAllCustomersUseCaseTest {
 
@@ -27,12 +27,8 @@ class GetAllCustomersUseCaseTest {
     fun `test execute calls repository and returns customer list`() = runBlocking {
 
         val customerList = listOf(
-            CustomerDto(1, "Alice", "alice@example.com", Calendar.getInstance().apply {
-                set(2024, Calendar.MARCH, 26)
-            }.time),
-            CustomerDto(2, "Bob", "bob@example.com", Calendar.getInstance().apply {
-                set(2024, Calendar.SEPTEMBER, 26)
-            }.time)
+            CustomerDto(1, "Alice", "alice@example.com", Date()),
+            CustomerDto(2, "Bob", "bob@example.com", Date()),
         )
 
         Mockito.`when`(repository.getAllCustomers()).thenReturn(customerList)
